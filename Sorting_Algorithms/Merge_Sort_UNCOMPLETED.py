@@ -28,4 +28,4 @@ def merge_sort(l):
 
 merge_sort(num_list)
 
-# CAN NOT UNDERSTAND RECURSION! (
+# CAN NOT UNDERSTAND RECURSION!(
