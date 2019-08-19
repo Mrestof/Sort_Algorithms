@@ -48,4 +48,16 @@ def quick_sort(l: list):
     return quick_sort(l1) + quick_sort(l2)
 
 
+def sort_test(original_list: list, sorted_list: list):
+    print('=' * len(str(num_list)))
+    list1 = list(original_list)
+    list1.sort()
+    if list1 == sorted_list:
+        print("Test success!")
+    else:
+        print("Test failed! :(")
+
+
+sort_test(num_list, quick_sort(num_list))
+
 print(quick_sort(num_list))
