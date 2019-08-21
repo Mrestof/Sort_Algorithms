@@ -13,6 +13,9 @@ print('Have this list: \n' + str(num_list) + '\nStart sorting...')
 
 
 def quick_sort(l: list):
+    """
+    This function crashes with RecursionError if some numbers in list that it takes are the same (need to fix)
+    """
     if len(l) <= 1:
         return l
 
@@ -53,11 +56,9 @@ def sort_test(original_list: list, sorted_list: list):
     list1 = list(original_list)
     list1.sort()
     if list1 == sorted_list:
-        print("Test success!")
+        return 1
     else:
-        print("Test failed! :(")
+        return 0
 
 
-sort_test(num_list, quick_sort(num_list))
-
-print(quick_sort(num_list))
+print("Test success!" if sort_test(num_list, quick_sort(num_list)) else "Test Failed!")
