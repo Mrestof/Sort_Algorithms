@@ -185,6 +185,67 @@ def insertion_sort(int_list: list):
     return {'list': int_list, 'time': finish_time - start_time}
 
 
+def heap_sort(int_list: list):
+    """
+    This function implements 'Heap Sort' algorithm.
+
+    :param list int_list: list to sort
+    :return: sorted list and execution time
+    """
+    int_list = list(int_list)
+
+    start_time = time.time()
+
+    num_heap = [int_list[0]]
+    counter = [1, 1]
+
+    while counter[1] < len(int_list):
+
+        num_heap.append(int_list[counter[0]])
+        current_pos = len(num_heap) - 1
+        parent_pos = int((current_pos + current_pos % 2 - 2) / 2)
+
+        while current_pos != 0 and num_heap[current_pos] < num_heap[parent_pos]:
+
+            num_heap[current_pos], num_heap[parent_pos] = num_heap[parent_pos], num_heap[current_pos]
+            current_pos = parent_pos
+
+            parent_pos = int((current_pos + current_pos % 2 - 2) / 2)
+
+        counter[0] += 1
+        counter[1] += 1
+
+    final_list = []
+
+    while len(num_heap) != 0:
+
+        num_heap[0], num_heap[len(num_heap) - 1] = num_heap[len(num_heap) - 1], num_heap[0]
+        final_list.append(num_heap[len(num_heap) - 1])
+        num_heap.pop(len(num_heap) - 1)
+        parent_pos = 0
+        child_pos = [1, 2]
+
+        while child_pos[0] < len(num_heap) and child_pos[1] < len(num_heap):
+
+            if num_heap[child_pos[0]] <= num_heap[child_pos[1]] and num_heap[child_pos[0]] <= num_heap[parent_pos]:
+                num_heap[child_pos[0]], num_heap[parent_pos] = num_heap[parent_pos], num_heap[child_pos[0]]
+                parent_pos = child_pos[0]
+            elif num_heap[child_pos[1]] <= num_heap[child_pos[0]] and num_heap[child_pos[1]] <= num_heap[parent_pos]:
+                num_heap[child_pos[1]], num_heap[parent_pos] = num_heap[parent_pos], num_heap[child_pos[1]]
+                parent_pos = child_pos[1]
+            else:
+                break
+
+            child_pos = [2 * parent_pos + 1, 2 * parent_pos + 2]
+
+        if child_pos[0] < len(num_heap) and num_heap[child_pos[0]] < num_heap[parent_pos]:
+            num_heap[child_pos[0]], num_heap[parent_pos] = num_heap[parent_pos], num_heap[child_pos[0]]
+
+    finish_time = time.time()
+
+    return {'list': final_list, 'time': finish_time - start_time}
+
+
 print(f'Have this list:\n {num_list} \nStart tests...\n' + '===' * 30)
 
 print('\nBubble Sort:')
@@ -201,3 +262,8 @@ print('Test success!' if sort_test(num_list, selection_sort(num_list)['list']) e
 
 print('\nInsertion Sort:')
 print('Test success!' if sort_test(num_list, insertion_sort(num_list)['list']) else "Test failed!")
+
+print('\nHeap Sort:')
+print('Test success!' if sort_test(num_list, heap_sort(num_list)['list']) else "Test failed!")
+
+print('\nAll tests completed')
