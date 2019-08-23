@@ -34,7 +34,7 @@ def bubble_sort(int_list: list):
     This function implements 'Bubble Sort' algorithm.
 
     :param list int_list: list to sort
-    :return: sorted list
+    :return: sorted list and execution time
     """
     int_list = list(int_list)
 
@@ -68,7 +68,7 @@ def quick_sort(int_list: list):
     This function implements 'Bubble Sort' algorithm.
 
     :param list int_list: list to sort
-    :return: sorted list
+    :return: sorted list and execution time
     """
     def q_s(l: list):
 
@@ -113,21 +113,53 @@ def merge_sort(int_list: list):
     """
     This function is in development
     :param list int_list: list to sort
-    :return: sorted list
+    :return: sorted list and execution time
     """
     int_list = list(int_list)
 
-    return int_list
+    return {'list': int_list, 'time': None}
+
+
+def selection_sort(int_list: list):
+    """
+    This function implements 'Bubble Sort' algorithm.
+
+    :param list int_list: list to sort
+    :return: sorted list and execution time
+    """
+    start_time = time.time()
+
+    counter = [0, 0]
+
+    while counter[1] < len(int_list):
+
+        num_min = int_list[counter[1]]
+        pos_min = counter[1]
+
+        for num in int_list:
+            if num < num_min and counter[0] >= counter[1]:
+                num_min = num
+                pos_min = counter[0]
+            counter[0] += 1
+
+        int_list[counter[1]], int_list[pos_min] = int_list[pos_min], int_list[counter[1]]
+
+        counter[1] += 1
+        counter[0] = 0
+
+    finish_time = time.time()
+
+    return {'list': int_list, 'time': finish_time - start_time}
 
 
 print('\nBubble Sort:')
-# print(f'list: {num_list}')
 print('Test success!' if sort_test(num_list, bubble_sort(num_list)['list']) else "Test failed!")
 
 print('\nQuick Sort:')
-# print(f'list: {num_list}')
 print('Test success!' if sort_test(num_list, quick_sort(num_list)['list']) else "Test failed!")
 
 print('\nMerge Sort:')
-# print(f'list: {num_list}')
-print('Test success!' if sort_test(num_list, merge_sort(num_list)) else "Test failed!")
+print('Test success!' if sort_test(num_list, merge_sort(num_list)['list']) else "Test failed!")
+
+print('\nSelection Sort:')
+print('Test success!' if sort_test(num_list, selection_sort(num_list)['list']) else "Test failed!")
