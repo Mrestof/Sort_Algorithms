@@ -115,7 +115,7 @@ def merge_sort(int_list: list):
     """
     int_list = list(int_list)
 
-    return {'list': int_list, 'time': None}
+    return {'list': int_list, 'time': 0}
 
 
 def selection_sort(int_list: list):
@@ -246,24 +246,57 @@ def heap_sort(int_list: list):
     return {'list': final_list, 'time': finish_time - start_time}
 
 
+def builtin_sort(int_list: list):
+    """
+    This function sort list with builtin method
+
+    :param list int_list: list to sort
+    :return: sorted list
+    """
+    int_list = list(int_list)
+
+    start_time = time.time()
+    int_list.sort()
+    finish_time = time.time()
+
+    return {'list': int_list, 'time': finish_time - start_time}
+
+
 print(f'Have this list:\n {num_list} \nStart tests...\n' + '===' * 30)
 
-print('\nBubble Sort:')
-print('Test success!' if sort_test(num_list, bubble_sort(num_list)['list']) else "Test failed!")
+sort_result = bubble_sort(num_list)
+print('\nBubble Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
-print('\nQuick Sort:')
-print('Test success!' if sort_test(num_list, quick_sort(num_list)['list']) else "Test failed!")
+sort_result = selection_sort(num_list)
+print('\nSelection Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
-print('\nMerge Sort:')
-print('Test success!' if sort_test(num_list, merge_sort(num_list)['list']) else "Test failed!")
+sort_result = insertion_sort(num_list)
+print('\nInsertion Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
-print('\nSelection Sort:')
-print('Test success!' if sort_test(num_list, selection_sort(num_list)['list']) else "Test failed!")
+sort_result = heap_sort(num_list)
+print('\nHeap Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
-print('\nInsertion Sort:')
-print('Test success!' if sort_test(num_list, insertion_sort(num_list)['list']) else "Test failed!")
+sort_result = merge_sort(num_list)
+print('\nMerge Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
-print('\nHeap Sort:')
-print('Test success!' if sort_test(num_list, heap_sort(num_list)['list']) else "Test failed!")
+sort_result = quick_sort(num_list)
+print('\nQuick Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
+
+sort_result = builtin_sort(num_list)
+print('\nBuiltin Sort:\n' +
+      f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
+      'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
 print('\nAll tests completed')
