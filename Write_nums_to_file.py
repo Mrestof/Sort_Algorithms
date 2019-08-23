@@ -10,7 +10,7 @@ for i in range(length):
 
 nums_string = ':'.join(nums)
 
-file = open('Sorting_Algorithms/nums.txt', 'w')
+file = open('Algorithms/nums.txt', 'w')
 file.write(nums_string)
 file.close()
 
@@ -18,6 +18,6 @@ file = open('nums.txt', 'w')
 file.write(nums_string)
 file.close()
 
-file = open('Sorting_Algorithms/nums.txt', 'r')
+file = open('Algorithms/nums.txt', 'r')
 print('File nums.txt now contain this:\n' + file.read())
 file.close()
