@@ -9,8 +9,6 @@ num_list = []
 for i in file_list:
     num_list.append(int(i))
 
-print('Have this list: \n' + str(num_list) + '\nStart tests...\n' + '===' * 30)
-
 
 def sort_test(original_list: list, sorted_list: list):
     """
@@ -65,7 +63,7 @@ def bubble_sort(int_list: list):
 
 def quick_sort(int_list: list):
     """
-    This function implements 'Bubble Sort' algorithm.
+    This function implements 'Quick Sort' algorithm.
 
     :param list int_list: list to sort
     :return: sorted list and execution time
@@ -122,11 +120,13 @@ def merge_sort(int_list: list):
 
 def selection_sort(int_list: list):
     """
-    This function implements 'Bubble Sort' algorithm.
+    This function implements 'Selection Sort' algorithm.
 
     :param list int_list: list to sort
     :return: sorted list and execution time
     """
+    int_list = list(int_list)
+
     start_time = time.time()
 
     counter = [0, 0]
@@ -152,6 +152,41 @@ def selection_sort(int_list: list):
     return {'list': int_list, 'time': finish_time - start_time}
 
 
+def insertion_sort(int_list: list):
+    """
+    This function implements 'Insertion Sort' algorithm.
+
+    :param list int_list: list to sort
+    :return: sorted list and execution time
+    """
+    int_list = list(int_list)
+
+    start_time = time.time()
+
+    sorted_length = 1
+    counter = [0, 1]
+
+    while counter[1] < len(int_list):
+
+        counter[0] = sorted_length
+
+        while counter[0] > 0:
+            if int_list[counter[0]] < int_list[counter[0] - 1]:
+                int_list[counter[0]], int_list[counter[0] - 1] = int_list[counter[0] - 1], int_list[counter[0]]
+                counter[0] -= 1
+            else:
+                break
+
+        sorted_length += 1
+        counter[1] += 1
+
+    finish_time = time.time()
+
+    return {'list': int_list, 'time': finish_time - start_time}
+
+
+print(f'Have this list:\n {num_list} \nStart tests...\n' + '===' * 30)
+
 print('\nBubble Sort:')
 print('Test success!' if sort_test(num_list, bubble_sort(num_list)['list']) else "Test failed!")
 
@@ -163,3 +198,6 @@ print('Test success!' if sort_test(num_list, merge_sort(num_list)['list']) else 
 
 print('\nSelection Sort:')
 print('Test success!' if sort_test(num_list, selection_sort(num_list)['list']) else "Test failed!")
+
+print('\nInsertion Sort:')
+print('Test success!' if sort_test(num_list, insertion_sort(num_list)['list']) else "Test failed!")
