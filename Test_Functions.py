@@ -1,13 +1,11 @@
+#!/usr/bin/python3
 import SortFunctions as SFunc
 
 file = open('nums.txt', 'r')
 file_list = file.read().split(':')
 file.close()
 
-num_list = []
-
-for i in file_list:
-    num_list.append(int(i))
+num_list = list(map(lambda str_in_list: int(str_in_list), file_list))
 
 
 def test_sort_functions(functions: list):
@@ -41,7 +39,7 @@ def test_sort_functions(functions: list):
 
 sorter = SFunc.Sort(num_list)
 
-functions_to_test = [sorter.bubble_sort, sorter.selection_sort, sorter.insertion_sort,
-                     sorter.heap_sort, sorter.merge_sort, sorter.quick_sort, sorter.builtin_sort]
+functions_to_test = [sorter.builtin_sort, sorter.quick_sort, sorter.merge_sort,
+                     sorter.heap_sort, sorter.insertion_sort, sorter.selection_sort, sorter.bubble_sort]
 
 test_sort_functions(functions_to_test)
