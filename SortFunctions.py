@@ -79,10 +79,15 @@ class Sort:
             tmp_list.append(l[sorted_pointer])
 
             return tmp_list + q_s(l2)
-        int_list = list(self.arr)
 
+        int_list = list(self.arr)
         start_time = time.time()
-        sorted_list = q_s(int_list)
+
+        try:
+            sorted_list = q_s(int_list)
+        except RecursionError:
+            return 'Recursion Error!!'
+
         finish_time = time.time()
 
         return {'list': sorted_list, 'time': finish_time - start_time}

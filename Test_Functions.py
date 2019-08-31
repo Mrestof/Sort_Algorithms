@@ -31,6 +31,9 @@ def test_sort_functions(functions: list):
     for func in functions:
         sort_result = func()
         print(f'\n{func.__name__}:')
+        if type(sort_result) == str:
+            print(sort_result)
+            continue
         print(f'Sorted in {round(sort_result["time"], 8)} seconds\n' +
               'Test success!' if sort_test(num_list, sort_result['list']) else "Test failed!")
 
